@@ -1,0 +1,131 @@
+gestion_pedidos.py
+Creo tres input para que me escriba sus datos personales,
+# y creo un archivo .txt para almacenarlos ahí.
+def registro_cliente():
+nombre = input('Escribe tu nombre: ')
+apellidos = input('Escribe tus apellidos: ')
+facturacion = input('Escribe tu factura: ')
+with open('datos_personales.txt', 'a') as file:
+file.write(f'{nombre},{apellidos},{facturacion} \n')
+# Mediante un 'with open' y la 'r' visualizo el archivo .txt
+# creado antes, los almaceno en la variable datos y los
+imprimo.
+def visualizar_clientes():
+with open('datos_personales.txt', 'r') as file:
+datos = file.readlines()
+print(f'Estos son los datos agregados: {datos}')
+# Primero creo un input para que me diga el nombre y lo meto
+en la variable ‘palabra’.
+# Después hago lo mismo que en el anterior para visualizar el
+archivo .txt.
+# Hago un 'if' para ver si 'palabra' está en 'datos' y en caso
+de que este lo mando
+# mediante un append a la lista vacía creada antes llamada
+'encontrado'.
+# Ahora lo imprimo y hago un else por si 'palabra' no se ha
+encontrado.
+def buscar_clientes():
+palabra = input('Introduzca el nombre del cliente que
+desea buscar: ')
+with open('datos_personales.txt', 'r') as file:
+datos = file.readlines()
+encontrado = []
+if palabra in datos:
+encontrado.append(palabra.strip())
+print(f'{encontrado} ha sido encontrado')
+else:
+print(f'{encontrado} no ha sido encontrado,pruebe
+
+otra vez')
+
+6
+
+# Primero creo un input para saber el nombre del cliente.
+# Creo una lista vacía.Creo un input para saber el nombre del
+producto y hago
+# un if por si el cliente quiere salirse del bucle.En caso de
+que no se salga,
+# le pediré el precio del producto y le mandaré estos datos a
+la variable 'productos'.
+def realizar_compra():
+cliente_nombre = input('Introduce el nombre del cliente:
+')
+productos = []
+while True:
+producto_nombre = input('Introduce el nombre del
+
+producto: ')
+
+if producto_nombre.lower() == 'salir':
+break
+else:
+precio = float(input('Introduce el precio del
+
+producto: '))
+
+productos.append(f'{producto_nombre},{precio}')
+# Abro el archivo .txt en modo agregar y escribo dentro de él
+el nombre del cliente.
+# Después itero sobre la lista de productos y meto dentro del
+.txt los datos de los productos.
+with open('compras.txt', 'a') as file:
+file.write(f'Cliente: {cliente_nombre}\n')
+for producto in productos:
+file.write(f'{producto}\n')
+file.write('\n')
+# Aqui lo que hago es mediante un input me ponga el
+cliente su nacionalidad,y si es
+# española,se le aplicara un iva del 21%,si no lo es,no se
+le aplicara ningun cambio en su precio.
+nacionalidad_cliente = input('Pon cual es tu nacionalidad:
+')
+if nacionalidad_cliente.lower() == 'española':
+impuestos = precio * 0,21
+precio += impuestos
+
+7
+
+print(f'Se le ha aplicado un 21% de impuestos.Total de
+
+la compra {precio}')
+else:
+print('Al no ser española,no se le aplicara iva.')
+# Creo dos input para que me ponga su numero y correo y
+mediante un print le confirmo que
+# se enviaran a esos datos que ha metido.
+def seguimiento_compra():
+numero = input('Introduzca su numero de telefono: ')
+correo = input('Introduzca su correo: ')
+print(f'Se enviaran sus datos al numero de telefono
+{numero} y al correo {correo}')
+menu_gestionpedidos.py
+from gestion_pedidos import*
+# Aquí hago unos print con las distintas opciones que le
+ofrezco al cliente.
+while True:
+
+print('1. Agregar un cliente')
+print('2. Visualizar datos personales')
+print('3. Buscar un cliente')
+print('4. Realizar compra')
+print('5. Seguimiento compra')
+print('6. Salir')
+
+# Solicita al usuario que elija una opción.
+opcion = int(input('Elige una opcion: '))
+
+if opcion == 1:
+registro_cliente()
+elif opcion == 2:
+visualizar_clientes()
+elif opcion == 3:
+buscar_clientes()
+elif opcion == 4:
+realizar_compra()
+elif opcion == 5:
+seguimiento_compra()
+elif opcion == 6:
+print('Hasta luego')
+break
+else:
+print('Opcion no valida, pruebe otra vez')
